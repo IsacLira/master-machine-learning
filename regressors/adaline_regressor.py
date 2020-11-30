@@ -2,17 +2,19 @@ import numpy as np
 from sklearn.utils import shuffle
 
 class ADALINERegressor:
-    def __init__(self):
+    def __init__(self, alpha=0.001, epoches=10):
+        self.alpha = alpha
+        self.epoches = epoches
         self.avg_error = []
         self.W = None
 
-    def fit(self, X, y, alpha=0.001, epoches=10):
+    def fit(self, X, y):
         X = np.c_[np.ones(len(X)), X]
 
         # Init weight matrix
-        self.W = 0.1 * np.random.randn(X.shape[1])
+        self.W = 0.001 * np.random.randn(X.shape[1])
 
-        for _ in range(epoches):
+        for _ in range(self.epoches):
             X, y = shuffle(X, y, random_state=100)
             for i in range(X.shape[0]):
                 x = X[i, :]
@@ -24,7 +26,7 @@ class ADALINERegressor:
 
                 # Update the weights
                 delta = np.outer(error, x_norm)
-                self.W = self.W + alpha*delta
+                self.W = self.W + self.alpha*delta
 
     def predict(self, X):
         X = np.c_[np.ones(len(X)), X]

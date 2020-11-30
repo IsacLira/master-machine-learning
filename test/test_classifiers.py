@@ -12,7 +12,7 @@ X_train, X_test, y_train, y_test = split(X, y, train_size=.7)
 
 
 # Instantiate the ADALINE model
-adaline_clf = ADALINEClassifier()
+
 adaline_clf.fit(X_train, y_train)
 # Compute the performance on test set
 print('Accuracy for ADALINE Model: ',

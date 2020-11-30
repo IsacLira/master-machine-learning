@@ -13,8 +13,8 @@ ls_reg.fit(X_train, y_train)
 score = r2_score(y_test, ls_reg.predict(X_test))
 print(f'Least Square performance: {score}')
 
-ada_reg = ADALINERegressor()
-ada_reg.fit(X_train, y_train, alpha=0.001, epoches=50)
+ada_reg = ADALINERegressor(alpha=0.001, epoches=50)
+ada_reg.fit(X_train, y_train)
 score = r2_score(y_test, ada_reg.predict(X_test))
 print(f'ADALINE Regressor performance: {score}')
 
